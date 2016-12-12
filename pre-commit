@@ -1,0 +1,5 @@
+#!/bin/bash
+if [[ `git status -s` > /dev/null ]]; then
+	python3 site_generate.py config.json
+	git add site
+fi
