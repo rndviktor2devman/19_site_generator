@@ -12,7 +12,6 @@
 			<div class="container">
 				<div class="panel-body">
 					<img src="https://devman.org/assets/images/devman.png">
-					<p class="pull-right panel-title"><a href="https://devman.org/encyclopedia/">Энциклопедия</a><p>
 				</div>
 			</div>
 		</div>
@@ -20,7 +19,7 @@
 			{% for key, value in struct.items() %}
 			<div class="col-md-3">
 				<div class="text-center">
-				<span class="label label-default text-uppercase">{{ key }}</span>
+				<span class="label label-default text-uppercase" style="background: #3CB371">{{ key }}</span>
 				</div>
 				<hr>
 				{% for item in value %}
