@@ -1,7 +1,7 @@
 # 19_site_generator
 
 Script converts markdown files set with provided site structure into 
-static site. You could check out the results of the script [here](https://rndviktor2devman.github.io/19_site_generator)
+static site. You could check out the results of the script [here](https://rndviktor2devman.github.io/19_site_generator/site/index.html)
 
 
 ####config.json
