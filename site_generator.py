@@ -16,10 +16,10 @@ def load_json(file):
         return json.load(data)
 
 
-def render_base(data):
+def render_base(page_structure):
     environment = Environment(loader=FileSystemLoader('./'))
     template = environment.get_template(SOURCE_TEMPLATES_PATH)
-    return template.render(data)
+    return template.render(page_structure)
 
 
 def build_site_structure(config):
@@ -30,28 +30,28 @@ def build_site_structure(config):
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
         html = md_conversion(os.path.join('articles', item['source']))
-        data = {'html': html,
+        page_structure = {'html': html,
                 'title': item['title'],
                 'topic': item['topic']}
         with open(os.path.join(output_dir, filename), 'w') as f:
-            f.write(render_base(data))
+            f.write(render_base(page_structure))
 
 
 def md_conversion(file):
-    with open(file, 'r') as data:
-        return markdown(data.read(), extensions=['codehilite',
-                                                 'fenced_code'])
+    with open(file, 'r') as md_file:
+        return markdown(md_file.read(),
+                        extensions=['codehilite', 'fenced_code'])
 
 
 def create_index(config):
-    data = defaultdict(list)
+    page_structure = defaultdict(list)
     for item in config['articles']:
         path = item['source'].replace('md', 'html')
-        data[item['topic']].append([os.path.join('articles', path), item['title']])
+        page_structure[item['topic']].append([os.path.join('articles', path), item['title']])
     env = Environment(loader=FileSystemLoader('./'))
     template = env.get_template(SOURCE_INDEX_PATH)
     with open(TARGET_INDEX_PATH, 'w') as f:
-        f.write(template.render(struct=data))
+        f.write(template.render(struct=page_structure))
 
 
 if __name__ == '__main__':
